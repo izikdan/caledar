@@ -70,8 +70,7 @@ const handleEmailClick = async (email) => {
       <input type="text" name="placeStudy" id="placeStudy" v-model="meet.placeStudy" >
       <label for="email">מייל</label>
       <input type="email" name="email" id="email" v-model="meet.email">
-      <input type="tel" name="tel" id="tel" v-model="meet.tel" ><label for="tel">טלפון</label>
- <br>
+      <input type="tel" name="tel" id="tel" v-model="meet.tel" ><label for="tel">טלפון</label><br>
       <label for="details">פרטים</label>
       <textarea id="details" v-model="meet.details" dir="rtl"></textarea><br />
       <button v-if="selectedMeet === null" type="button" @click="addMeet">סיים</button>
