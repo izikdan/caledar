@@ -20,11 +20,11 @@ const addMeet = (e) => {
   meet.value.name = '';
   meet.value.date = '';
   meet.value.details = '';
-  meet.value.email ='';
-  meet.value.tel='';
-  meet.value.placeStudy='';
-    localStorage.setItem('meets', JSON.stringify(meets.value));
-      onMounted();
+  meet.value.email = '';
+  meet.value.tel = '';
+  meet.value.placeStudy = '';
+  localStorage.setItem('meets', JSON.stringify(meets.value));
+  onMounted();
 
 
 }
@@ -67,10 +67,10 @@ const handleEmailClick = async (email) => {
       <label for="date">תאריך</label>
       <VueDatePicker v-model="meet.date" multi-dates />
       <label for="placeStudy">מקום לימודים</label>
-      <input type="text" name="placeStudy" id="placeStudy" v-model="meet.placeStudy" >
+      <input type="text" name="placeStudy" id="placeStudy" v-model="meet.placeStudy">
       <label for="email">מייל</label>
       <input type="email" name="email" id="email" v-model="meet.email">
-      <input type="tel" name="tel" id="tel" v-model="meet.tel" ><label for="tel">טלפון</label><br>
+      <input type="tel" name="tel" id="tel" v-model="meet.tel"><label for="tel">טלפון</label><br>
       <label for="details">פרטים</label>
       <textarea id="details" v-model="meet.details" dir="rtl"></textarea><br />
       <button v-if="selectedMeet === null" type="button" @click="addMeet">סיים</button>
@@ -82,12 +82,12 @@ const handleEmailClick = async (email) => {
           <div v-show="new Date().getDate() === 30" class="reminder">אל תשכח לשלוח דוח סיכום ודרישת תשלום למייל היום</div>
           <div v-if="selectedMeet === index" class="selected-meet">
             <MeetInfo @click="handleMeetClick(index)" :name="meet.name" :date="meet.date" />
-            <h2 >מקום לימודים</h2>
+            <h2>מקום לימודים</h2>
             <div class="title-line1"></div>
-            <PlaceSudy :placeStudy="meet.placeStudy"/>
-             <h2>סיכום פגישה</h2> 
-                <div class="title-line"></div>
-            <MeetDetails @click="handleMeetClick(index)" :details="meet.details"/>
+            <PlaceSudy :placeStudy="meet.placeStudy" />
+            <h2>סיכום פגישה</h2>
+            <div class="title-line"></div>
+            <MeetDetails @click="handleMeetClick(index)" :details="meet.details" />
 
             <MeetEmail :email="meet.email" @click="handleEmailClick(meet.email)" :tel="meet.tel" />
             <div class="actions">
@@ -110,18 +110,20 @@ const handleEmailClick = async (email) => {
   flex-wrap: wrap;
   gap: 10px;
 }
+
 .title-line1 {
   width: 100%;
   height: 0;
   border-top: 2px solid #2a2020;
-    /* background-color: #2a2020; */
+  /* background-color: #2a2020; */
   margin: 5px 0;
 }
+
 .title-line {
   width: 100%;
   height: 0;
   border-top: 2px solid #2a2020;
-    /* background-color: #2a2020; */
+  /* background-color: #2a2020; */
   margin: 5px 0;
 }
 
@@ -143,20 +145,20 @@ const handleEmailClick = async (email) => {
   top: 20%;
   left: 50%;
   transform: translateX(-50%) scale(1.2);
-  padding:10px 20px;
+  padding: 10px 20px;
   display: flex;
   flex-direction: column;
   background-color: rgb(187, 242, 223);
   align-items: center;
   z-index: 2;
   display: grid;
-  grid-template-rows: auto 1fr auto; 
+  grid-template-rows: auto 1fr auto;
   gap: 10px;
   align-items: center;
 }
+
 .actions {
   display: flex;
   gap: 10px;
   justify-content: center;
-}
-</style>
+}</style>
