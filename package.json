@@ -9,6 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@fortawesome/vue-fontawesome": "^3.0.3",
     "@syncfusion/ej2-vue-calendars": "^22.2.10",
     "@syncfusion/ej2-vue-grids": "^22.2.10",
     "@syncfusion/ej2-vue-schedule": "^22.2.8",
@@ -21,6 +24,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
-    "vite": "^4.4.5"
+    "vite": "^4.4.5",
+    "vue-drawing-canvas": "^1.0.14"
   }
 }

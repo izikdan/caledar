@@ -7,8 +7,9 @@ defineProps({
 
 <template>
   <div>
-    <h4 class="green">{{ tel }} {{ email }}</h4>
-    <a href="d0573193323@gmail.com">שלח לי מייל</a>
+    <h5 class="green">{{ tel }} {{ email }} שלח מייל</h5>
+    <!-- <a href="mailto:d0573193323@gmail.com">שלח לי מייל</a> -->
+    <!-- <a https="//wa.me/+972533193323">שלח ווצאפ</a> -->
   </div>
 </template>
 

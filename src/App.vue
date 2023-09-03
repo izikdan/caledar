@@ -3,17 +3,31 @@ import MeetInfo from './components/MeetInfo.vue'
 import MeetDetails from './components/MeetDetails.vue'
 import MeetEmail from './components/MeetEmail.vue'
 import PlaceSudy from './components/PlaceStudy.vue'
-import { ref } from 'vue'
+import { ref , onMounted } from 'vue'
 import VueDatePicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css'
+import '@vuepic/vue-datepicker/dist/main.css';
+// import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+// import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+
 
 let meets = ref([]);
 let meet = ref({});
 let selectedMeet = ref(null);
+let myCanvas = ref(null);
+
 const meetLocal = JSON.parse(localStorage.getItem("meets"));
 if (meetLocal) {
   meets.value = meetLocal;
 }
+onMounted(() => {
+  const canvas = myCanvas.value;
+  const ctx = canvas.getContext('2d');
+  if (ctx) {
+  ctx.moveTo(0,0);
+ctx.lineTo(200,100);
+ctx.stroke();
+  }
+  } );
 const addMeet = (e) => {
   let newMeet = { ...meet.value }
   meets.value.push(newMeet)
@@ -24,7 +38,6 @@ const addMeet = (e) => {
   meet.value.tel = '';
   meet.value.placeStudy = '';
   localStorage.setItem('meets', JSON.stringify(meets.value));
-  onMounted();
 
 
 }
@@ -38,7 +51,6 @@ const saveEdit = () => {
   meet.value.editIndex = undefined;
   meet.value = {};
   localStorage.setItem('meets', JSON.stringify(meets.value));
-  selectedMeet.value = null;
 };
 const deleteMeet = (index) => {
   meets.value.splice(index, 1);
@@ -48,14 +60,10 @@ const deleteMeet = (index) => {
 const handleMeetClick = (index) => {
   selectedMeet.value = selectedMeet.value === index ? null : index;
 };
-const handleEmailClick = async (email) => {
-  try {
-    await navigator.clipboard.writeText(email);
-    window.open(`mailto:d0573193323@gmail.com?cc=${email}`);
-  } catch (err) {
-    console.error('Failed to copy email: ', err);
-  }
+const handleEmailClick = (email) => {
+  window.location.href = `mailto:${email}`;
 }
+
 
 </script>
 
@@ -63,7 +71,7 @@ const handleEmailClick = async (email) => {
   <div>
     <form>
       <label for="name">שם</label>
-      <input type="text" id="name" v-model="meet.name"><br />
+      <input type="text" id="name" v-model="meet.name"/><br />
       <label for="date">תאריך</label>
       <VueDatePicker v-model="meet.date" multi-dates />
       <label for="placeStudy">מקום לימודים</label>
@@ -80,16 +88,19 @@ const handleEmailClick = async (email) => {
         <div class="card-header">
           <MeetInfo @click="handleMeetClick(index)" :name="meet.name" :date="meet.date" />
           <div v-show="new Date().getDate() === 30" class="reminder">אל תשכח לשלוח דוח סיכום ודרישת תשלום למייל היום</div>
-          <div v-if="selectedMeet === index" class="selected-meet">
+          <div v-if="selectedMeet === index" class="selected-meet" style="border:1px solid #000000">
             <MeetInfo @click="handleMeetClick(index)" :name="meet.name" :date="meet.date" />
-            <h2>מקום לימודים</h2>
+           <div class="title1"><h2>מקום לימודים</h2> </div>
             <div class="title-line1"></div>
+           
             <PlaceSudy :placeStudy="meet.placeStudy" />
-            <h2>סיכום פגישה</h2>
-            <div class="title-line"></div>
-            <MeetDetails @click="handleMeetClick(index)" :details="meet.details" />
+            <div class="title2"><h2>סיכום פגישה</h2></div>
+            <div class="title-line2"></div>
+            <MeetDetails @click="handleMeetClick(index)" :details="meet.details" style="border: 1px;" />
 
             <MeetEmail :email="meet.email" @click="handleEmailClick(meet.email)" :tel="meet.tel" />
+            <!-- <font-awesome-icon icon="envelope" @click="handleEmailClick(meet.email)" /> -->
+
             <div class="actions">
               <button @click="deleteMeet(index)">מחק</button>
               <button @click="editMeet(index)">ערוך</button>
@@ -110,21 +121,33 @@ const handleEmailClick = async (email) => {
   flex-wrap: wrap;
   gap: 10px;
 }
-
-.title-line1 {
-  width: 100%;
-  height: 0;
-  border-top: 2px solid #2a2020;
-  /* background-color: #2a2020; */
-  margin: 5px 0;
+.title1{
+  position: absolute;
+  top: 60px;
+  left: 70px;
 }
-
-.title-line {
+.title-line1 {
+  position: relative;
+  width: 100%;
+  height: 0;
+  border-top: 2px solid #2a2020;
+  top: 15px;
+  /* background-color: #2a2020; */
+  /* margin: 5px 0; */
+}
+.title2{
+  position: absolute;
+  top: 150px;
+  left: 70px;
+}
+.title-line2 {
+  position: relative;
   width: 100%;
   height: 0;
   border-top: 2px solid #2a2020;
   /* background-color: #2a2020; */
-  margin: 5px 0;
+  top: 15px;
+  /* margin: 5px 0; */
 }
 
 .meet-card {
@@ -139,13 +162,17 @@ const handleEmailClick = async (email) => {
   padding: 10px;
 
 }
+#myCanvas {
+  border: 1px;
+}
 
 .selected-meet {
   position: absolute;
-  top: 20%;
+  top: 70%;
   left: 50%;
   transform: translateX(-50%) scale(1.2);
   padding: 10px 20px;
+  border: 1px solid #0000;
   display: flex;
   flex-direction: column;
   background-color: rgb(187, 242, 223);

@@ -17,12 +17,9 @@ defineProps({
                   <label for="pay"> <input id="pay" type="checkbox">שילם</label>
           </div> -->
 </template> 
-<!-- <style> -->
-/* .green{
- display: flex;
-  gap: 100px;
-  justify-content: center;
-  /* background-color: rgb(0, 255, 208); */
-/* }
-  
-<!-- </style> -->
+<style> 
+ .green{
+ border: 1px;
+ 
+ }
+   </style>
