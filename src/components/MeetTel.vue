@@ -1,12 +1,12 @@
 <script setup>
 defineProps({
-  email: String
+  tel: Number
 })
 </script>
 
 <template>
   <div>
-    <h5 class="green"> {{ email }} <button>שלח מייל</button> </h5>
+    <h5 class="green">{{ tel }} <button>שלח ווצאפ</button> </h5>
   </div>
 </template>
 

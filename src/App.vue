@@ -2,7 +2,8 @@
 import MeetInfo from './components/MeetInfo.vue'
 import MeetDetails from './components/MeetDetails.vue'
 import MeetEmail from './components/MeetEmail.vue'
-import PlaceSudy from './components/PlaceStudy.vue'
+import MeetTel from './components/MeetTel.vue'
+import PlaceStudy from './components/PlaceStudy.vue'
 import { ref , onMounted } from 'vue'
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
@@ -62,7 +63,14 @@ const handleMeetClick = (index) => {
 };
 const handleEmailClick = (email) => {
   window.location.href = `mailto:${email}`;
-}
+};
+const openChat = (tel) => {
+  window.open(`https://web.whatsapp.com/send?phone=:${tel}`);
+  store.commit("setSelectedMeet", {
+    tel,
+  });
+};
+
 
 
 </script>
@@ -71,7 +79,7 @@ const handleEmailClick = (email) => {
   <div>
     <form>
       <label for="name">שם</label>
-      <input type="text" id="name" v-model="meet.name"/><br />
+      <input type="text" id="name" v-model="meet.name" /><br />
       <label for="date">תאריך</label>
       <VueDatePicker v-model="meet.date" multi-dates />
       <label for="placeStudy">מקום לימודים</label>
@@ -87,19 +95,19 @@ const handleEmailClick = (email) => {
       <div v-for="(meet, index) in meets" :key="index" class="meet-card">
         <div class="card-header">
           <MeetInfo @click="handleMeetClick(index)" :name="meet.name" :date="meet.date" />
-          <div v-show="new Date().getDate() === 30" class="reminder">אל תשכח לשלוח דוח סיכום ודרישת תשלום למייל היום</div>
+          <div v-show="new Date().getDate() === 2" class="reminder">אל תשכח לשלוח דוח סיכום ודרישת תשלום למייל היום</div>
           <div v-if="selectedMeet === index" class="selected-meet" style="border:1px solid #000000">
             <MeetInfo @click="handleMeetClick(index)" :name="meet.name" :date="meet.date" />
-           <div class="title1"><h2>מקום לימודים</h2> </div>
+           <div class="title1"  @click="handleMeetClick(index)" ><h2>מקום לימודים</h2> </div>
             <div class="title-line1"></div>
            
-            <PlaceSudy :placeStudy="meet.placeStudy" />
-            <div class="title2"><h2>סיכום פגישה</h2></div>
+            <PlaceStudy  @click="handleMeetClick(index)" :placeStudy="meet.placeStudy" />
+            <div class="title2" @click="handleMeetClick(index)"  ><h2>סיכום פגישה</h2></div>
             <div class="title-line2"></div>
             <MeetDetails @click="handleMeetClick(index)" :details="meet.details" style="border: 1px;" />
 
-            <MeetEmail :email="meet.email" @click="handleEmailClick(meet.email)" :tel="meet.tel" />
-            <!-- <font-awesome-icon icon="envelope" @click="handleEmailClick(meet.email)" /> -->
+            <MeetEmail :email="meet.email" @click="handleEmailClick(meet.email)"  />
+            <MeetTel :tel="meet.tel" @click="openChat(meet.tel)" />
 
             <div class="actions">
               <button @click="deleteMeet(index)">מחק</button>
