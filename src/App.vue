@@ -7,6 +7,9 @@ import PlaceStudy from './components/PlaceStudy.vue'
 import { ref , onMounted } from 'vue'
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
+// import WhatsAppFlutter from 'whatsapp-flutter-vue';
+// Vue.use(WhatsAppFlutter);
+
 // import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 // import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
@@ -65,10 +68,10 @@ const handleEmailClick = (email) => {
   window.location.href = `mailto:${email}`;
 };
 const openChat = (tel) => {
-  window.open(`https://web.whatsapp.com/send?phone=:${tel}`);
-  store.commit("setSelectedMeet", {
-    tel,
-  });
+  window.open(`https://web.whatsapp.com/send?phone=${tel}`);
+  // store.commit("setSelectedMeet", {
+  //   tel,
+  // });
 };
 
 

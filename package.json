@@ -20,7 +20,9 @@
     "nodemailer": "^6.9.4",
     "pdfmake": "^0.2.7",
     "vue": "^3.3.4",
-    "vue-html2pdf": "^1.8.0"
+    "vue-html2pdf": "^1.8.0",
+    "whatsapp-flutter-vue": "^0.0.1"
+
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
