@@ -1,7 +1,6 @@
 <script setup>
 defineProps({
-  name: String,
-  date: Date
+  name: String
 })
 
 // const name = ref("")
@@ -9,5 +8,5 @@ defineProps({
 </script>
 <template>
 
-      <h2>{{ name }} - {{ date }}  </h2>
+      <h2>{{ name }} - </h2>
 </template>
